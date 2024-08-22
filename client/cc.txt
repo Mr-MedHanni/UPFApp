@@ -1,0 +1,70 @@
+import React from 'react';
+import { View, StyleSheet, ScrollView, ImageSourcePropType } from 'react-native';
+import HeaderNav from './HeaderNav';
+import TitleComponent from './TitleComponent';
+import SearchBar from './SearchBar'; 
+import IconRetour from './IconRetour'; // Import IconRetour
+
+const UPFemploiPage: React.FC = ({ navigation }) => {
+  const localImage: ImageSourcePropType = require('./assets/profile.jpg');
+  const localImage1: ImageSourcePropType = require('./assets/notif.jpg');
+
+  const handleNotificationPress = () => {-
+    console.log('Notification icon pressed');
+  };
+
+  const handleToggleButton = () => {
+    // Toggle logic here
+  };
+
+  const handleSearchChange = (text: string) => {
+    console.log(text);
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.headerContainer}>
+        <IconRetour onPress={() => navigation.goBack()}  />
+        <HeaderNav
+          userImage={localImage}
+          onNotificationPress={handleNotificationPress}
+          notificationIcon={localImage1}
+          notificationCount={1}
+          isButtonActive={false}
+          onToggleButton={handleToggleButton}
+          greeting={''}
+          userName={''}
+        />
+      </View>
+
+      <TitleComponent title="offres d'emplois" />
+
+      <SearchBar onSearchChange={handleSearchChange} />
+
+      <ScrollView style={styles.scrollView}>
+        {/* Content of the UPF Laureat Page (e.g., job offers) */}
+      </ScrollView>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 1,
+    backgroundColor: '#fff',
+  },
+  scrollView: {
+    marginHorizontal: 16,
+    marginTop: 10,
+  },
+});
+
+export default UPFemploiPage;
