@@ -8,10 +8,10 @@ import { ImageSourcePropType } from 'react-native';
 import UPFemploiPage from './UPFemploiPage';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { MaterialIcons, Ionicons, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 
 // Navigation setup
 const Stack = createStackNavigator();
-
 
 const MainNavigator = () => {
   return (
@@ -55,11 +55,12 @@ const App: React.FC = ({ navigation }: any) => {
   ];
 
   const menuItems = [
-    { id: '1', title: 'Actualités &\névénements', icon: require('./assets/actualites.png'), selected: true },
-    { id: '2', title: 'Complexe\nsportif', icon: require('./assets/sport.png'), selected: false },
-    { id: '3', title: 'Bibliothèque', icon: require('./assets/bibliotheque.png'), selected: false },
-    { id: '4', title: 'UPF Laureat', icon: require('./assets/laureat.png'), selected: false },
-    { id: '5', title: 'La pause', icon: require('./assets/pause.png'), selected: false },
+    { id: '1', title: 'Actualités &\névénements', icon:<Ionicons name="sparkles-outline" size={24} color="white" />, selected: true },
+    { id: '2', title: 'Complexe\nsportif', icon: <Ionicons name="football" size={24} color="#173C89" />, selected: false },
+    { id: '3', title: 'Bibliothèque', icon: <FontAwesome5 name="book-reader" size={24} color="#173C89" />, selected: false },
+    { id: '4', title: 'UPF Laureat', icon: <MaterialIcons name="groups" size={24} color="#173C89" />, selected: false },
+    { id: '5', title: 'La pause', icon: <MaterialCommunityIcons name="food-fork-drink" size={24} color="#173C89" />, selected: false },
+    { id: '6', title: 'BDE / clubs', icon: <MaterialIcons name="groups" size={24} color="#173C89" />, selected: false },  
   ];
 
   const handleMenuItemPress = (id: string) => {

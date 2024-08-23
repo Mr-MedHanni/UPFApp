@@ -1,10 +1,10 @@
 import React from 'react';
-import { ScrollView, View, Text, TouchableOpacity, Image, StyleSheet, ImageSourcePropType } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 interface MenuItem {
   id: string;
   title: string;
-  icon: ImageSourcePropType;
+  icon: React.ReactNode; // Ensure it's a valid React element (like an icon component)
   selected?: boolean;
 }
 
@@ -19,8 +19,10 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ menuItems, onMenuItemPr
       {menuItems.map((item) => (
         <TouchableOpacity key={item.id} style={styles.menuItem} onPress={() => onMenuItemPress(item.id)}>
           <View style={item.selected ? styles.iconCircleSelected : styles.iconCircle}>
-            <Image source={item.icon} style={styles.icon} />
+            {/* Ensure `icon` is a valid React node */}
+            {React.isValidElement(item.icon) ? item.icon : null}
           </View>
+          {/* Wrap `title` in a <Text> component */}
           <Text style={item.selected ? styles.menuTextSelected : styles.menuText}>
             {item.title}
           </Text>
@@ -52,14 +54,10 @@ const styles = StyleSheet.create({
     width: 57,
     height: 57,
     borderRadius: 28.5,
-    backgroundColor: '#C10074', 
+    backgroundColor: '#C10074',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 5,
-  },
-  icon: {
-    width: 24,
-    height: 24,
   },
   menuText: {
     fontSize: 12,
@@ -68,7 +66,7 @@ const styles = StyleSheet.create({
   },
   menuTextSelected: {
     fontSize: 12,
-    color: '#C10074', 
+    color: '#C10074',
     textAlign: 'center',
   },
 });
