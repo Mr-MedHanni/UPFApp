@@ -1,24 +1,22 @@
 import React from 'react';
-import { View, Image, Text, TouchableOpacity, StyleSheet, ImageSourcePropType } from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 interface NotificationComponentProps {
-  notificationIcon: ImageSourcePropType;
   notificationCount: number;
   onNotificationPress: () => void;
 }
 
 const NotificationComponent: React.FC<NotificationComponentProps> = ({
-  notificationIcon,
   notificationCount,
   onNotificationPress,
 }) => {
   return (
     <TouchableOpacity onPress={onNotificationPress} style={styles.notificationContainer}>
-      <Image source={notificationIcon} style={styles.notificationIcon} />
+      <Ionicons name="notifications-outline" size={30} color="#C10074" style={styles.notificationIcon} />
+      {/* Show a dot instead of number */}
       {notificationCount > 0 && (
-        <View style={styles.notificationBadge}>
-          <Text style={styles.badgeText}>{notificationCount}</Text>
-        </View>
+        <View style={styles.notificationDot} />
       )}
     </TouchableOpacity>
   );
@@ -32,22 +30,15 @@ const styles = StyleSheet.create({
   notificationIcon: {
     width: 32,
     height: 32,
-    backgroundColor: '#ccc',
   },
-  notificationBadge: {
+  notificationDot: {
     position: 'absolute',
     top: -4,
     right: -4,
+    width: 10,
+    height: 10,
+    borderRadius: 5,
     backgroundColor: '#f00',
-    borderRadius: 8,
-    padding: 2,
-    minWidth: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  badgeText: {
-    color: '#fff',
-    fontSize: 10,
   },
 });
 

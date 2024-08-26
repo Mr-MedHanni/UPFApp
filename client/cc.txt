@@ -1,17 +1,130 @@
 import React from 'react';
+import { View, Image, TouchableOpacity, StyleSheet, ImageSourcePropType } from 'react-native';
+
+interface NotificationComponentProps {
+  notificationIcon: ImageSourcePropType;
+  notificationCount: number;
+  onNotificationPress: () => void;
+}
+
+const NotificationComponent: React.FC<NotificationComponentProps> = ({
+  notificationIcon,
+  notificationCount,
+  onNotificationPress,
+}) => {
+  return (
+    <TouchableOpacity onPress={onNotificationPress} style={styles.notificationContainer}>
+      <Image source={notificationIcon} style={styles.notificationIcon} />
+      {/* Show a dot instead of number */}
+      {notificationCount > 0 && (
+        <View style={styles.notificationDot} />
+      )}
+    </TouchableOpacity>
+  );
+};
+
+const styles = StyleSheet.create({
+  notificationContainer: {
+    position: 'relative',
+    marginRight: 16,
+  },
+  notificationIcon: {
+    width: 32,
+    height: 32,
+    backgroundColor: '#ccc',
+  },
+  // New dot style
+  notificationDot: {
+    position: 'absolute',
+    top: -4,
+    right: -4,
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#f00',
+  },
+});
+
+export default NotificationComponent;
+
+
+
+
+
+
+
+
+
+
+
+import React from 'react';
 import { View, StyleSheet, ScrollView, ImageSourcePropType } from 'react-native';
 import HeaderNav from './HeaderNav';
 import TitleComponent from './TitleComponent';
 import SearchBar from './SearchBar'; 
-import IconRetour from './IconRetour'; // Import IconRetour
+import IconRetour from './IconRetour'; 
+import JobCardComponent from './JobCardComponent'; 
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import NotificationScreen from './NotificationScreen';
 
 const UPFemploiPage: React.FC = ({ navigation }) => {
   const localImage: ImageSourcePropType = require('./assets/profile.jpg');
   const localImage1: ImageSourcePropType = require('./assets/notif.jpg');
+  const Stack = createStackNavigator();
 
-  const handleNotificationPress = () => {-
-    console.log('Notification icon pressed');
-  };
+
+  
+const MainNavigator = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+              
+        
+        <Stack.Screen
+          name="Notifications"
+          component={NotificationScreen}
+          options={{ headerShown: false }} // Disable the header for Notifications screen
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+const handleNotificationPress = () => {
+  navigation.navigate('Notifications'); // Navigate to the Notifications screen
+};
+
+
+
+
+
+  // Sample job data array
+  const jobData = [
+    {
+      logoSource: require('./assets/cgi-logo.png'),
+      title: "Développeur Fullstack JAVA / Angular",
+      company: "CGI",
+      location: "Fès",
+      date: "Offre publiée il y a plus de 10 jours",
+    },
+    {
+      logoSource: require('./assets/ATIJARI.png'),
+      title: "Designer UI/UX",
+      company: "Atos",
+      location: "Casablanca",
+      date: "Offre publiée il y a 5 jours",
+    },
+    {
+      logoSource: require('./assets/IBM.png'),
+      title: "Project Manager",
+      company: "IBM",
+      location: "Rabat",
+      date: "Offre publiée il y a 3 jours",
+    },
+    // Add more jobs as needed
+  ];
+
+ 
 
   const handleToggleButton = () => {
     // Toggle logic here
@@ -21,10 +134,18 @@ const UPFemploiPage: React.FC = ({ navigation }) => {
     console.log(text);
   };
 
+  const handleReadMore = () => {
+    console.log('Read more clicked');
+  };
+
+  const handleApplyNow = () => {
+    console.log('Apply Now clicked');
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <IconRetour onPress={() => navigation.goBack()}  />
+        <IconRetour onPress={() => navigation.goBack()} />
         <HeaderNav
           userImage={localImage}
           onNotificationPress={handleNotificationPress}
@@ -42,7 +163,18 @@ const UPFemploiPage: React.FC = ({ navigation }) => {
       <SearchBar onSearchChange={handleSearchChange} />
 
       <ScrollView style={styles.scrollView}>
-        {/* Content of the UPF Laureat Page (e.g., job offers) */}
+        {jobData.map((job, index) => (
+          <JobCardComponent
+            key={index}
+            logoSource={job.logoSource}
+            title={job.title}
+            company={job.company}
+            location={job.location}
+            date={job.date}
+            onReadMore={handleReadMore}
+            onApplyNow={handleApplyNow}
+          />
+        ))}
       </ScrollView>
     </View>
   );

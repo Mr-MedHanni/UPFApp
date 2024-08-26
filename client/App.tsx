@@ -6,6 +6,7 @@ import HorizontalMenu from './HorizontalMenu';
 import TitleComponent from './TitleComponent';
 import { ImageSourcePropType } from 'react-native';
 import UPFemploiPage from './UPFemploiPage';
+import NotificationScreen from './NotificationScreen'; 
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { MaterialIcons, Ionicons, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
@@ -27,6 +28,11 @@ const MainNavigator = () => {
           component={UPFemploiPage}
           options={{ headerShown: false }} // Disable the header for UPFLaureat screen
         />
+        <Stack.Screen
+          name="Notifications"
+          component={NotificationScreen}
+          options={{ headerShown: false }} // Disable the header for Notifications screen
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -40,7 +46,7 @@ const App: React.FC = ({ navigation }: any) => {
   const localImage1: ImageSourcePropType = require('./assets/notif.jpg');
 
   const handleNotificationPress = () => {
-    console.log('Notification icon pressed');
+    navigation.navigate('Notifications'); // Navigate to the Notifications screen
   };
 
   const handleToggleButton = () => {
@@ -82,7 +88,7 @@ const App: React.FC = ({ navigation }: any) => {
         userImage={localImage}
         onNotificationPress={handleNotificationPress}
         notificationIcon={localImage1}
-        notificationCount={1}
+        notificationCount={true}
         isButtonActive={isButtonActive}
         onToggleButton={handleToggleButton}
       />

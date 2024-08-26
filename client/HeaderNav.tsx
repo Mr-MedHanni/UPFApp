@@ -7,11 +7,12 @@ interface HeaderNavProps {
   greeting: string;
   userName: string;
   userImage: ImageSourcePropType;
-  onNotificationPress: () => void;
+  onNotificationPress?: () => void;
   notificationIcon: ImageSourcePropType;
   notificationCount: number;
   isButtonActive: boolean;
   onToggleButton: () => void;
+  showNotificationIcon?: boolean;  // New prop
 }
 
 const HeaderNav: React.FC<HeaderNavProps> = ({
@@ -22,6 +23,7 @@ const HeaderNav: React.FC<HeaderNavProps> = ({
   notificationIcon,
   notificationCount,
   onToggleButton,
+  showNotificationIcon = true,  // Default to true
 }) => {
   return (
     <View style={styles.container}>
@@ -31,11 +33,13 @@ const HeaderNav: React.FC<HeaderNavProps> = ({
       </View>
 
       <View style={styles.rightContainer}>
-        <NotificationComponent
-          notificationIcon={notificationIcon}
-          notificationCount={notificationCount}
-          onNotificationPress={onNotificationPress}
-        />
+        {showNotificationIcon && (
+          <NotificationComponent
+            notificationIcon={notificationIcon}
+            notificationCount={notificationCount}
+            onNotificationPress={onNotificationPress}
+          />
+        )}
         <ProfileComponent userImage={userImage} onToggleButton={onToggleButton} />
       </View>
     </View>

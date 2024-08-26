@@ -4,11 +4,15 @@ import HeaderNav from './HeaderNav';
 import TitleComponent from './TitleComponent';
 import SearchBar from './SearchBar'; 
 import IconRetour from './IconRetour'; 
-import JobCardComponent from './JobCardComponent'; 
+import JobCardComponent from './JobCardComponent';
 
 const UPFemploiPage: React.FC = ({ navigation }) => {
   const localImage: ImageSourcePropType = require('./assets/profile.jpg');
   const localImage1: ImageSourcePropType = require('./assets/notif.jpg');
+
+  const handleNotificationPress = () => {
+    navigation.navigate('Notifications'); // Navigate to the Notifications screen
+  };
 
   // Sample job data array
   const jobData = [
@@ -35,10 +39,6 @@ const UPFemploiPage: React.FC = ({ navigation }) => {
     },
     // Add more jobs as needed
   ];
-
-  const handleNotificationPress = () => {
-    console.log('Notification icon pressed');
-  };
 
   const handleToggleButton = () => {
     // Toggle logic here
