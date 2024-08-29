@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, ScrollView, StyleSheet, ImageSourcePropType } from 'react-native';
 import TitleComponent from './TitleComponent';
 import IconRetour from './IconRetour';
@@ -8,6 +8,7 @@ import ProfileComponentNotif from './ProfileComponentNotif';
 import SubtitleComponent from './SubtitleComponent';
 
 const NotificationScreen: React.FC = ({ navigation }) => {
+  const [isButtonActive, setIsButtonActive] = useState(false);
   const localImage: ImageSourcePropType = require('./assets/profile.jpg');
   const localImage2: ImageSourcePropType = require('./assets/hanni.jpg');
   const handleSearchChange = (text: string) => {
@@ -16,10 +17,15 @@ const NotificationScreen: React.FC = ({ navigation }) => {
 
   // Sample notifications data
   const notifications = [
-    { id: '1', name: 'Milha Mohammed Amine', subtitle: 'Développeur Fullstack JAVA / Angular', image: localImage },
-    { id: '2', name: 'HANNI MOHAMED', subtitle: 'Développeur Fullstack JAVA / Angular', image: localImage2 },
-    { id: '3', name: 'Alami Anas', subtitle: 'Développeur Fullstack JAVA / Angular', image: localImage },
+    { id: '1', name: 'Milha Mohammed Amine', subtitle: 'test', image: localImage },
+    { id: '2', name: 'HANNI MOHAMED', subtitle: 'test', image: localImage2 },
+    { id: '3', name: 'Alami Anas', subtitle: 'test', image: localImage },
   ];
+  const handleToggleButton = () => {
+    setIsButtonActive(!isButtonActive);
+  };
+  
+
 
   return (
     <View style={styles.container}>
@@ -29,7 +35,9 @@ const NotificationScreen: React.FC = ({ navigation }) => {
           userImage={localImage} 
           greeting={''} 
           userName={''}
-          showNotificationIcon={false}  // Disable the notification icon
+          showNotificationIcon={false}
+          isButtonActive={isButtonActive}
+          onToggleButton={handleToggleButton}
         />
       </View>
 
@@ -69,8 +77,8 @@ const styles = StyleSheet.create({
   notificationItem: {
     backgroundColor: '#f9f9f9',
     borderRadius: 10,
-    padding: 10,
-    marginBottom: 10,
+    padding: 13,
+    marginBottom: 12,
   },
 });
 

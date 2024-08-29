@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, ImageSourcePropType } from 'react-native';
 import HeaderNav from './HeaderNav';
 import TitleComponent from './TitleComponent';
 import SearchBar from './SearchBar'; 
 import IconRetour from './IconRetour'; 
 import JobCardComponent from './JobCardComponent';
+import ProfileScreen from './ProfileScreen';
 
 const UPFemploiPage: React.FC = ({ navigation }) => {
+  const [isButtonActive, setIsButtonActive] = useState(false);
   const localImage: ImageSourcePropType = require('./assets/profile.jpg');
   const localImage1: ImageSourcePropType = require('./assets/notif.jpg');
 
@@ -41,7 +43,7 @@ const UPFemploiPage: React.FC = ({ navigation }) => {
   ];
 
   const handleToggleButton = () => {
-    // Toggle logic here
+    setIsButtonActive(!isButtonActive);
   };
 
   const handleSearchChange = (text: string) => {
@@ -56,6 +58,8 @@ const UPFemploiPage: React.FC = ({ navigation }) => {
     console.log('Apply Now clicked');
   };
 
+
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -65,10 +69,12 @@ const UPFemploiPage: React.FC = ({ navigation }) => {
           onNotificationPress={handleNotificationPress}
           notificationIcon={localImage1}
           notificationCount={1}
-          isButtonActive={false}
-          onToggleButton={handleToggleButton}
+         // isButtonActive={false}
+        //  onToggleButton={handleToggleButton}
           greeting={''}
           userName={''}
+          isButtonActive={isButtonActive}
+          onToggleButton={handleToggleButton}
         />
       </View>
 

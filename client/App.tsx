@@ -10,7 +10,7 @@ import NotificationScreen from './NotificationScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { MaterialIcons, Ionicons, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
-
+import ProfileScreen from './ProfileScreen';
 // Navigation setup
 const Stack = createStackNavigator();
 
@@ -32,6 +32,11 @@ const MainNavigator = () => {
           name="Notifications"
           component={NotificationScreen}
           options={{ headerShown: false }} // Disable the header for Notifications screen
+        />
+         <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{ headerShown: false }} // Disable the header for Profile screen
         />
       </Stack.Navigator>
     </NavigationContainer>

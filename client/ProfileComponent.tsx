@@ -1,5 +1,8 @@
+// ProfileComponent.tsx
+
 import React from 'react';
 import { View, Image, StyleSheet, ImageSourcePropType, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 interface ProfileComponentProps {
   userImage: ImageSourcePropType;
@@ -7,9 +10,16 @@ interface ProfileComponentProps {
 }
 
 const ProfileComponent: React.FC<ProfileComponentProps> = ({ userImage, onToggleButton }) => {
+  const navigation = useNavigation();
+
+  const handleProfilePress = () => {
+    navigation.navigate('Profile'); // Navigate to the Profile screen
+    onToggleButton();
+  };
+
   return (
     <View>
-      <TouchableOpacity onPress={onToggleButton}>
+      <TouchableOpacity onPress={handleProfilePress}>
         <Image source={userImage} style={styles.userImage} />
       </TouchableOpacity>
     </View>

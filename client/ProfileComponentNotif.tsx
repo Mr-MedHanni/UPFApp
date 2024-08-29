@@ -26,11 +26,13 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 5,
     marginRight: 10,
+    marginTop:-15
   },
   Name: {
     fontSize: 16,
     fontWeight: 'bold',
-    color:'#173C89'
+    color:'#173C89',
+    marginTop:-40
   },
 });
 

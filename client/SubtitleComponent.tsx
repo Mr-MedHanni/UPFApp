@@ -11,9 +11,10 @@ const SubtitleComponent: React.FC<SubtitleComponentProps> = ({ subtitle }) => {
 
 const styles = StyleSheet.create({
   subtitle: {
-    fontSize: 14,
+    fontSize: 12,
     color: '#757575',
-    marginTop: 2,
+    marginTop: -35,
+    left:60
   },
 });
 
