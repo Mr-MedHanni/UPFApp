@@ -11,6 +11,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { MaterialIcons, Ionicons, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import ProfileScreen from './ProfileScreen';
+import InformationsPersonnelles from './InformationsPersonnelles';
+import UpdateInformations from './UpdateInformations';
+import Connexionetsecurite from './Connexionetsecurite';
 // Navigation setup
 const Stack = createStackNavigator();
 
@@ -38,7 +41,15 @@ const MainNavigator = () => {
           component={ProfileScreen}
           options={{ headerShown: false }} // Disable the header for Profile screen
         />
+
+
+
+        <Stack.Screen name="InformationsPersonnelles" component={InformationsPersonnelles} options={{ headerShown: false }} />
+        <Stack.Screen name="UpdateInformations" component={UpdateInformations} options={{ headerShown: false }} />
+       
+        <Stack.Screen name="Connexionetsecurite" component={Connexionetsecurite} options={{ headerShown: false }} />
       </Stack.Navigator>
+      
     </NavigationContainer>
   );
 };

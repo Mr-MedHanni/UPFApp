@@ -10,34 +10,40 @@ import { AntDesign, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const ProfileScreen: React.FC = ({ navigation }) => {
+
+
+  
+
   const settingsItems = [
     {
       iconComponent: <Ionicons name="person-circle-outline" size={30} color="#B11072" />,
+      id: '1',
       title: 'Informations personnelles',
-      onPress: () => navigation.navigate('PersonalInfo'),
+      onPress: () => navigation.navigate('InformationsPersonnelles'), // Update to new screen name
     },
     {
       iconComponent: <Icon name="security" size={30} color="#B11072" />,
-      title: 'Connexion et sécurité',
-      onPress: () => navigation.navigate('Security'),
+      id: '2',title: 'Connexion et sécurité',
+      onPress: () => navigation.navigate('Connexionetsecurite'),
     },
     {
       iconComponent: <AntDesign name="message1" size={30} color="#B11072" />,
-      title: 'Messages',
-      onPress: () => navigation.navigate('Messages'),
+      id: '3',title: 'Messages',
+      //onPress: () => navigation.navigate('UpdateInformations'),
     },
     {
       iconComponent: <MaterialIcons name="question-answer" size={30} color="#B11072" />,
-      title: 'Your listings',
+      id: '4', title: 'Your listings',
       onPress: () => navigation.navigate('listings'),
     },
     {
       iconComponent: <Icon name="exit-to-app" size={30} color="#B11072" />,
-      title: 'Déconnexion',
+      id: '5', title: 'Déconnexion',
       onPress: () => navigation.navigate('Logout'),
     },
   ];
 
+  
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>

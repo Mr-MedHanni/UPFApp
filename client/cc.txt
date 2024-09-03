@@ -1,181 +1,71 @@
 import React from 'react';
-import { View, Image, TouchableOpacity, StyleSheet, ImageSourcePropType } from 'react-native';
-
-interface NotificationComponentProps {
-  notificationIcon: ImageSourcePropType;
-  notificationCount: number;
-  onNotificationPress: () => void;
-}
-
-const NotificationComponent: React.FC<NotificationComponentProps> = ({
-  notificationIcon,
-  notificationCount,
-  onNotificationPress,
-}) => {
-  return (
-    <TouchableOpacity onPress={onNotificationPress} style={styles.notificationContainer}>
-      <Image source={notificationIcon} style={styles.notificationIcon} />
-      {/* Show a dot instead of number */}
-      {notificationCount > 0 && (
-        <View style={styles.notificationDot} />
-      )}
-    </TouchableOpacity>
-  );
-};
-
-const styles = StyleSheet.create({
-  notificationContainer: {
-    position: 'relative',
-    marginRight: 16,
-  },
-  notificationIcon: {
-    width: 32,
-    height: 32,
-    backgroundColor: '#ccc',
-  },
-  // New dot style
-  notificationDot: {
-    position: 'absolute',
-    top: -4,
-    right: -4,
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: '#f00',
-  },
-});
-
-export default NotificationComponent;
-
-
-
-
-
-
-
-
-
-
-
-import React from 'react';
-import { View, StyleSheet, ScrollView, ImageSourcePropType } from 'react-native';
-import HeaderNav from './HeaderNav';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import IconRetour from './IconRetour';
 import TitleComponent from './TitleComponent';
-import SearchBar from './SearchBar'; 
-import IconRetour from './IconRetour'; 
-import JobCardComponent from './JobCardComponent'; 
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import NotificationScreen from './NotificationScreen';
+import Info from './info';
+import { EvilIcons, FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
-const UPFemploiPage: React.FC = ({ navigation }) => {
-  const localImage: ImageSourcePropType = require('./assets/profile.jpg');
-  const localImage1: ImageSourcePropType = require('./assets/notif.jpg');
-  const Stack = createStackNavigator();
-
-
-  
-const MainNavigator = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-              
-        
-        <Stack.Screen
-          name="Notifications"
-          component={NotificationScreen}
-          options={{ headerShown: false }} // Disable the header for Notifications screen
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
-const handleNotificationPress = () => {
-  navigation.navigate('Notifications'); // Navigate to the Notifications screen
-};
-
-
-
-
-
-  // Sample job data array
-  const jobData = [
+const InformationsPersonnelles: React.FC<{ navigation: any }> = ({ navigation }) => {
+  const settingsItems1 = [
     {
-      logoSource: require('./assets/cgi-logo.png'),
-      title: "Développeur Fullstack JAVA / Angular",
-      company: "CGI",
-      location: "Fès",
-      date: "Offre publiée il y a plus de 10 jours",
+      iconComponent: <EvilIcons name="user" size={24} color="#8B8B8B" />,
+      id: '1',
+      title1: 'Username',
+      title11: 'Mohamed Hanni',
+      onPress: () => navigation.navigate('InformationsPersonnelles'),
     },
     {
-      logoSource: require('./assets/ATIJARI.png'),
-      title: "Designer UI/UX",
-      company: "Atos",
-      location: "Casablanca",
-      date: "Offre publiée il y a 5 jours",
+      iconComponent: <MaterialCommunityIcons name="email-fast-outline" size={24} color="#8B8B8B" />,
+      id: '2',
+      title1: 'Email',
+      title11: 'hanni-moh@upf.ac.ma',
+      onPress: () => navigation.navigate('Connexionetsecurite'),
     },
     {
-      logoSource: require('./assets/IBM.png'),
-      title: "Project Manager",
-      company: "IBM",
-      location: "Rabat",
-      date: "Offre publiée il y a 3 jours",
+      iconComponent: <Ionicons name="call-outline" size={24} color="#8B8B8B" />,
+      id: '3',
+      title1: 'Phone',
+      title11: '0652485685',
+      onPress: () => navigation.navigate('UpdateInformations'),
     },
-    // Add more jobs as needed
+    {
+      iconComponent: <FontAwesome name="shopping-bag" size={24} color="#8B8B8B" />,
+      id: '4',
+      title1: 'Job Title',
+      title11: 'Front-end Dev',
+      onPress: () => navigation.navigate('listings'),
+    },
+    {
+      iconComponent: <EvilIcons name="location" size={24} color="#8B8B8B" />,
+      id: '5',
+      title1: 'Location',
+      title11: 'Fes, Morocco',
+      onPress: () => navigation.navigate('Logout'),
+    },
   ];
-
- 
-
-  const handleToggleButton = () => {
-    // Toggle logic here
-  };
-
-  const handleSearchChange = (text: string) => {
-    console.log(text);
-  };
-
-  const handleReadMore = () => {
-    console.log('Read more clicked');
-  };
-
-  const handleApplyNow = () => {
-    console.log('Apply Now clicked');
-  };
 
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <IconRetour onPress={() => navigation.goBack()} />
-        <HeaderNav
-          userImage={localImage}
-          onNotificationPress={handleNotificationPress}
-          notificationIcon={localImage1}
-          notificationCount={1}
-          isButtonActive={false}
-          onToggleButton={handleToggleButton}
-          greeting={''}
-          userName={''}
-        />
       </View>
 
-      <TitleComponent title="offres d'emplois" />
+      {/* Container for Title and Icon */}
+      <View style={styles.titleAndIconContainer}>
+        <TitleComponent title="Informations personnelles" />
+        <TouchableOpacity onPress={() => navigation.navigate('UpdateInformations')}>
+       {
+        <MaterialCommunityIcons name="file-refresh-outline" size={34} color="#B11072" />
+       } 
+        </TouchableOpacity>
+      </View>
 
-      <SearchBar onSearchChange={handleSearchChange} />
-
-      <ScrollView style={styles.scrollView}>
-        {jobData.map((job, index) => (
-          <JobCardComponent
-            key={index}
-            logoSource={job.logoSource}
-            title={job.title}
-            company={job.company}
-            location={job.location}
-            date={job.date}
-            onReadMore={handleReadMore}
-            onApplyNow={handleApplyNow}
-          />
-        ))}
-      </ScrollView>
+      <Info
+        name="Hanni Mohamed"
+        email="hanni-moh@upf.ac.ma"
+        navigation={navigation}
+        settingsItems1={settingsItems1}
+      />
     </View>
   );
 };
@@ -193,10 +83,125 @@ const styles = StyleSheet.create({
     paddingVertical: 1,
     backgroundColor: '#fff',
   },
-  scrollView: {
-    marginHorizontal: 16,
-    marginTop: 10,
+  titleAndIconContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between', // Align items on opposite ends
+    alignItems: 'center', // Center vertically
+    paddingHorizontal: 16,
+    marginTop: 10, // Add margin for spacing
   },
 });
 
-export default UPFemploiPage;
+export default InformationsPersonnelles;
+
+
+
+
+
+
+
+
+
+
+
+
+import React from 'react';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
+import ProfileImage from './ProfileImage';
+
+interface SettingsItemProps1 {
+  title11: React.ReactNode;
+  iconComponent: React.ReactNode;
+  title1: string;
+  onPress: () => void;
+}
+
+interface ProfileProps1 {
+  name: string;
+  email: string;
+  navigation: any;
+  settingsItems1: SettingsItemProps1[];
+}
+
+const Info: React.FC<ProfileProps1> = ({ name, email, navigation, settingsItems1 }) => {
+  return (
+    <View style={styles.profileContainer}>
+      <View style={styles.profileInfo}>
+        <ProfileImage imageSource={require('./assets/profile.jpg')} />
+        <View>
+          <Text style={styles.profileName}>{name}</Text>
+          <Text style={styles.profileEmail}>{email}</Text>
+        </View>
+      </View>
+      <View style={styles.settingsContainer}>
+        {settingsItems1.map((item, index) => (
+          <View key={index} style={styles.settingsItem}>
+            <View style={styles.itemLeft}>
+              {item.iconComponent}
+              <View style={styles.textInputContainer}>
+                <Text style={styles.settingsText}>{item.title1}</Text>
+                <TextInput style={styles.settingsInput} value={item.title11 as string} />
+              </View>
+            </View>
+          </View>
+        ))}
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  profileContainer: {
+    paddingHorizontal: 16,
+    paddingVertical: 24,
+  },
+  profileInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 24,
+  },
+  profileName: {
+    color: '#173C89',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  profileEmail: {
+    fontSize: 16,
+    color: '#777',
+  },
+  settingsContainer: {
+    marginTop: 24,
+  },
+  settingsItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+  },
+  itemLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  textInputContainer: {
+    flexDirection: 'column',
+    marginLeft: 16,
+  },
+  settingsText: {
+    color: '#8B8B8B',
+    fontSize: 12,
+    marginBottom: 4,
+  },
+  settingsInput: {
+    color: '#000000',
+    fontSize: 14,
+   borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 0,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+  },
+});
+
+export default Info;

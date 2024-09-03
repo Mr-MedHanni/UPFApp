@@ -4,6 +4,7 @@ import { AntDesign, Ionicons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ProfileImage from './ProfileImage';
 
+
 interface SettingsItemProps {
   iconComponent: React.ReactNode;
   title: string;
@@ -16,6 +17,9 @@ interface ProfileProps {
   navigation: any;
   settingsItems: SettingsItemProps[];
 }
+
+
+
 
 const Profile: React.FC<ProfileProps> = ({ name, email, navigation, settingsItems }) => {
   return (
@@ -41,6 +45,9 @@ const Profile: React.FC<ProfileProps> = ({ name, email, navigation, settingsItem
             <AntDesign name="right" size={20} color="#B11072" />
           </TouchableOpacity>
         ))}
+
+        {/* Add the "Informations personnelles" setting item */}
+       
       </View>
     </View>
   );
